@@ -24,6 +24,8 @@ function App() {
   setname("smana")
  }
 
+ console.log(name)
+
 
 
   return (
