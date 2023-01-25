@@ -18,10 +18,20 @@ function App() {
 
   // const name = 'saman'
 
- const [name, setname] = useState("chathudu")
+//  
+
+const [name, setname] = useState({
+  sname: "chathu",
+  city: "apura",
+  position: "web developer"
+})
 
  const click = () =>{
-  setname("smana")
+  // setname("smana")
+  setname({
+    ...name,
+    sname:"fuck"
+  })
  }
 
  console.log(name)
@@ -31,7 +41,7 @@ function App() {
   return (
     <div>
       <h1>chathudu</h1>
-      <h2>{name}</h2>
+      <h2>{name.sname}</h2>
       {/* <Main /> */}
       {Test}
       <button
