@@ -44,6 +44,12 @@ const [inputVal, setinputVal] = useState('')
   );
 })
 
+// const inputChangeHandle = (event,data) => {
+//   event.preventDefault();
+//   console.log(data);
+//   setinputVal(event.target.value);
+// };
+
   return (
     <div>
       <h1>chathudu</h1>
