@@ -4,21 +4,7 @@ import React, { useEffect, useState } from "react";
 import Main from './Components/Main';
 import myData from './Data/myData';
 
-
-const Test = myData.map(({id, name,city,position}) => {
-  return (
-    <Main key={id} name={name} city={city} position={position}/>  
-  );
-})
-
-
-
-
 function App() {
-
-  // const name = 'saman'
-
-//  
 
 const [name, setname] = useState({
   sname: "chathu",
@@ -26,25 +12,51 @@ const [name, setname] = useState({
   position: "web developer"
 })
 
+const [myDataState, setmyDataState] = useState(myData)
+
  const click = () =>{
   // setname("smana")
   setname({
     ...name,
-    sname:"fuck"
+    sname:"fuck",
+    city:"newCity"
   })
+
+  setmyDataState([
+    ...myDataState,
+    {
+      id:'5',
+      name:'name5',
+      city:'city5',
+      position:'pos5'
+    }
+  ])
+
  }
 
  console.log(name)
+ console.log(myDataState)
 
-
+ const Test = myDataState.map(({id, name,city,position},index) => {
+  return (
+    <Main key={id+index} name={name} city={city} position={position}/>  
+  );
+})
 
   return (
     <div>
       <h1>chathudu</h1>
       <h2>{name.sname}</h2>
+      <h2>{name.city}</h2>
       {/* <Main /> */}
       {Test}
       <button
+
+      style={{
+        fontSize:"12px",
+        order: "1px solid red",
+        padding: "7px 12px",
+    }}
       
       onClick={click}
       >
