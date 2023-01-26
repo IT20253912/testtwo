@@ -13,6 +13,7 @@ const [name, setname] = useState({
 })
 
 const [myDataState, setmyDataState] = useState(myData)
+const [inputVal, setinputVal] = useState('')
 
  const click = () =>{
   // setname("smana")
@@ -48,6 +49,7 @@ const [myDataState, setmyDataState] = useState(myData)
       <h1>chathudu</h1>
       <h2>{name.sname}</h2>
       <h2>{name.city}</h2>
+      <h2>{inputVal}</h2>
       {/* <Main /> */}
       {Test}
       <button
@@ -62,6 +64,23 @@ const [myDataState, setmyDataState] = useState(myData)
       >
         click
       </button>
+      <br />
+      <br />
+      <input style={{
+        border:"1px solid red",
+        fontSize: "14px",
+        padding: "7px",
+       }}
+       type="text"
+       placeholder='type some thing'
+
+       onChange={(e) => {
+        e.preventDefault()
+        setinputVal(e.target.value)
+       }}
+
+       
+       />
     </div>
   );
 }
