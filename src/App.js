@@ -1,106 +1,104 @@
+import { useState } from "react";
+import './App.css'
+import Unit from "./Components/Unit";
 
-import './App.css';
-import React, { useEffect, useState } from "react";
-import Main from './Components/Main';
-import myData from './Data/myData';
 
-function App() {
+const App = () => {
 
-const [name, setname] = useState({
-  sname: "chathu",
-  city: "apura",
-  position: "web developer"
-})
+  const [imgeurl, setimgeurl] = useState('')
+  const [name, setname] = useState('')
+  const [city, setcity] = useState('')
+  const [position, setposition] = useState('')
 
-const [myDataState, setmyDataState] = useState(myData)
-const [inputVal, setinputVal] = useState('')
-const [testvalue, settestvalue] = useState(0)
+  const [myData, setmyData] = useState([])
 
- const click = () =>{
-  // setname("smana")
-  setname({
-    ...name,
-    sname:"fuck",
-    city:"newCity"
-  })
-
-  setmyDataState([
-    ...myDataState,
-    {
-      id:'5',
-      name:'name5',
-      city:'city5',
-      position:'pos5'
-    }
-  ])
-
- }
-
- const plus = () => {
-  setTimeout(()=>{
-    console.log("clicked");
-    settestvalue((pre) => pre +1);
-  },3000)
- }
-
- console.log(name)
- console.log(myDataState)
-
- const Test = myDataState.map(({id, name,city,position},index) => {
-  return (
-    <Main key={id+index} name={name} city={city} position={position}/>  
-  );
-})
-
-// const inputChangeHandle = (event,data) => {
-//   event.preventDefault();
-//   console.log(data);
-//   setinputVal(event.target.value);
-// };
+  console.log(myData)
 
   return (
-    <div>
-      <h1>chathudu</h1>
-      <h2>{name.sname}</h2>
-      <h2>{name.city}</h2>
-      <h2>{inputVal}</h2>
-      {/* <Main /> */}
-      {Test}
-      <button
+    <div className="main_container">
+      <div className="main_left">
+        <input type="text" value={imgeurl} onChange={(e)=>{
+            e.preventDefault()
+            setimgeurl(e.target.value)
+        }}/>
+        <input type="text" value={name} onChange={(e)=>{
+            e.preventDefault()
+            setname(e.target.value)
+        }}/>
+        <input type="text" value={city} onChange={(e)=>{
+            e.preventDefault()
+            setcity(e.target.value)
+        }}/>
+        <input type="text" value={position} onChange={(e)=>{
+            e.preventDefault()
+            setposition(e.target.value)
+        }}/>
+        <button onClick={()=>{
+          // console.log({
+          //   imgeurl,
+          //   name,
+          //   city,
+          //   position,
+          // })
+          setmyData((pre)=>{
+            return [
+              ...pre,
+              {
+                image:imgeurl,
+                name,
+                city,
+                position,
+              }
+            ]
+          })
 
-      style={{
-        fontSize:"12px",
-        order: "1px solid red",
-        padding: "7px 12px",
-    }}
-      
-      onClick={click}
-      >
-        click
-      </button>
-      <br />
-      <br />
-      <input style={{
-        border:"1px solid red",
-        fontSize: "14px",
-        padding: "7px",
-       }}
-       type="text"
-       placeholder='type some thing'
+          setimgeurl(pre=>{
+            if(pre.length>0){
+              return ''
+            }else {
+              return pre;
+            }
+          })
 
-       onChange={(e) => {
-        e.preventDefault()
-        setinputVal(e.target.value)
-       }}
+          setname(pre=>{
+            if(pre.length > 0){
+              return ''
+            }else{
+              return pre
+            }
+          })
 
-       
-       />
+          setcity(pre=>{
+            if(pre.length > 0){
+              return ''
+            }else {
+              return pre
+            }
+          })
 
-       <button 
-       onClick={plus}
-       />
+          setposition(pre=>{
+            if(pre.length > 0) {
+              return ''
+            }else {
+              return pre
+            }
+          })
+
+
+
+        }}>Submit</button>
+      </div>
+      <div className="main_right">
+        {myData?.map(({image,name,city,position},index)=><Unit
+        image={image}
+        name={name}
+        city={city}
+        position={position}
+        key={index} />
+        )}
+      </div>
     </div>
   );
 }
 
-export default App;
+export default App
