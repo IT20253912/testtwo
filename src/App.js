@@ -14,6 +14,7 @@ const [name, setname] = useState({
 
 const [myDataState, setmyDataState] = useState(myData)
 const [inputVal, setinputVal] = useState('')
+const [testvalue, settestvalue] = useState(0)
 
  const click = () =>{
   // setname("smana")
@@ -33,6 +34,13 @@ const [inputVal, setinputVal] = useState('')
     }
   ])
 
+ }
+
+ const plus = () => {
+  setTimeout(()=>{
+    console.log("clicked");
+    settestvalue((pre) => pre +1);
+  },3000)
  }
 
  console.log(name)
@@ -86,6 +94,10 @@ const [inputVal, setinputVal] = useState('')
        }}
 
        
+       />
+
+       <button 
+       onClick={plus}
        />
     </div>
   );
