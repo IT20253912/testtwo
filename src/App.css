@@ -1,3 +1,46 @@
+.header_container{
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 100px;
+  background-color: antiquewhite;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header_container nav{
+  position: relative;
+
+}
+
+.header_container nav ul {
+  position: absolute;
+  top: -39px;
+  right: -22px;
+  padding: 20px;
+  height: 100vh;
+  background-color: beige;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.header_container nav ul li {
+  cursor: pointer;
+  font-weight: 700;
+  transition: all;
+
+}
+
+.header_container nav ul li:hover{
+  color: red;
+}
+
 .main_container{
   margin: 0 auto;
   width: 90%;

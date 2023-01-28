@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import './App.css'
+import Header from "./Components/Header";
 import Unit from "./Components/Unit";
 
 
@@ -10,28 +11,50 @@ const App = () => {
   const [city, setcity] = useState('')
   const [position, setposition] = useState('')
 
+  const [inputData, setinputData] = useState({
+    imageUrl:'',
+    name:'',
+    city:'',
+    position:'',
+  })
+
   const [myData, setmyData] = useState([])
 
   console.log(myData)
 
   return (
+    <Fragment>
+      <Header />
     <div className="main_container">
       <div className="main_left">
-        <input type="text" value={imgeurl} onChange={(e)=>{
+        <input type="text" value={inputData.imageUrl} onChange={(e)=>{
             e.preventDefault()
-            setimgeurl(e.target.value)
+            setinputData(preInput=>({
+              ...preInput,
+              imageUrl:e.target.value
+
+            }))
         }}/>
-        <input type="text" value={name} onChange={(e)=>{
+        <input type="text" value={inputData.name} onChange={(e)=>{
             e.preventDefault()
-            setname(e.target.value)
+            setinputData(preInput=>({
+              ...preInput,
+              name:e.target.value
+            }))
         }}/>
-        <input type="text" value={city} onChange={(e)=>{
+        <input type="text" value={inputData.city} onChange={(e)=>{
             e.preventDefault()
-            setcity(e.target.value)
+            setinputData(preInput=>({
+              ...preInput,
+              city:e.target.value
+            }))
         }}/>
-        <input type="text" value={position} onChange={(e)=>{
+        <input type="text" value={inputData.position} onChange={(e)=>{
             e.preventDefault()
-            setposition(e.target.value)
+            setinputData(preInput=>({
+              ...preInput,
+              position:e.target.value
+            }))
         }}/>
         <button onClick={()=>{
           // console.log({
@@ -44,45 +67,32 @@ const App = () => {
             return [
               ...pre,
               {
-                image:imgeurl,
-                name,
-                city,
-                position,
+                image:inputData.imageUrl,
+                name:inputData.name,
+                city:inputData.city,
+                position:inputData.position,
               }
             ]
           })
 
-          setimgeurl(pre=>{
-            if(pre.length>0){
-              return ''
+          // clear text box
+          setinputData(pre=>{
+            if(pre.imageUrl.length>0){
+              return {
+                ...pre,
+                imageUrl:''
+              }
             }else {
               return pre;
             }
           })
 
-          setname(pre=>{
-            if(pre.length > 0){
-              return ''
-            }else{
-              return pre
-            }
-          })
+          setinputData((pre) => (pre.name.length > 0 ? ({
+            ...pre,
+            name:''
+          }):pre))
 
-          setcity(pre=>{
-            if(pre.length > 0){
-              return ''
-            }else {
-              return pre
-            }
-          })
-
-          setposition(pre=>{
-            if(pre.length > 0) {
-              return ''
-            }else {
-              return pre
-            }
-          })
+          
 
 
 
@@ -98,6 +108,7 @@ const App = () => {
         )}
       </div>
     </div>
+    </Fragment>
   );
 }
 
