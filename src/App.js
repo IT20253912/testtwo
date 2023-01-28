@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState,useEffect } from "react";
 import './App.css'
 import Header from "./Components/Header";
 import Unit from "./Components/Unit";
@@ -6,10 +6,10 @@ import Unit from "./Components/Unit";
 
 const App = () => {
 
-  const [imgeurl, setimgeurl] = useState('')
-  const [name, setname] = useState('')
-  const [city, setcity] = useState('')
-  const [position, setposition] = useState('')
+  // const [imgeurl, setimgeurl] = useState('')
+  // const [name, setname] = useState('')
+  // const [city, setcity] = useState('')
+  // const [position, setposition] = useState('')
 
   const [inputData, setinputData] = useState({
     imageUrl:'',
@@ -19,13 +19,30 @@ const App = () => {
   })
 
   const [myData, setmyData] = useState([])
+  const [windowWidth, setwindowWidth] = useState(window.innerWidth)
+  // first test
+  // useEffect(() => {
+  //   console.log("use effect calling..");
+  // }, [inputData.name]);
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setwindowWidth(window.innerWidth);
+    })
+    console.log("use effect calling..")
+  })
+  
+
+
+  
 
   console.log(myData)
 
   return (
     <Fragment>
-      <Header />
+      <Header /> 
     <div className="main_container">
+      <h1>{windowWidth}</h1>
       <div className="main_left">
         <input type="text" value={inputData.imageUrl} onChange={(e)=>{
             e.preventDefault()
