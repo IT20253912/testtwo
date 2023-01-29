@@ -5,56 +5,72 @@ import './App.css'
 
 const App = () => {
 
-  const [apiId, setapiId] = useState('')
-  const [data, setdata] = useState({})
+const [apiID, setapiID] = useState('1')
+const [data, setdata] = useState('')
+const [search, setsearch] = useState(0)
 
-  console.log(apiId)
-  console.log(data)
+// console.log(apiID)
+// console.log(data)
 
-  useEffect(() => {
-    console.log('useEffect running')
+useEffect(() => {
+  console.log('api test')
+  console.log("useEffect running");
 
-    const apiCall = async () => {
-      const res = await fetch(
-        `https://jsonplaceholder.typicode.com/posts/${apiId}`
-      )
-      const data = await res.json()
+  const apiCall = async()=> {
+    const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${apiID}`)
+    const data = await res.json()
 
-      if(data) {
-        setdata(data)
-      }
+    if(data){
+      setdata(data)
     }
+ } 
 
-    if(apiId.length > 0 && Number(apiId) > 0 && Number(apiId) <= 100) {
-      console.log("use effect if condition")
-      apiCall();
-    }
-    return () => {
-      console.log('clean')
-      apiCall()
-    }
-
-  }, [apiId])
+  if(apiID.length > 0 && (Number(apiID) > 0 && Number(apiID) <= 100)) {
+    console.log('useEffect if condition running') 
+    apiCall()
+  }
   
-  return(
+  // cleanup function
+  return () => {
+    console.log('cleanup test')
+    apiCall();
+    
+  }
+}, [search])
+
+
+// console.log(apiID)
+
+  return (
     <div>
-      <input type='text' 
-      value={apiId} 
-      onChange={(e)=>setapiId(e.target.value)} 
-      placeholder='Enter ID' />
+      <input type='text'
+      placeholder="Enter ID"
+      value={apiID}
+      onChange={
+        (e)=>setapiID(e.target.value)
+      }
+      />
+      <button
+      onClick={()=>setsearch(pre=>pre===0?1:0)}
+      >Submit</button>
+      <br />
+      <br />
 
-        {data && (
-          <div>
-            <h2>{data.title}</h2>
-            <h6>{data.body}</h6>
-          </div>
-        )}
+      {/* <h3>{data.title}</h3>
+      <h6>{data.body}</h6> */}
 
-
-
+      {/* check data available or not */}
+      {data && (
+        <div>
+          <h2>{data.title}</h2>
+          <p>{data.body}</p>
+        </div>
+      )}
 
     </div>
   )
+
+
 }
   
 export default App
